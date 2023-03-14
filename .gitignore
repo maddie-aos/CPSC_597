@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#ignoring excel outputfiles
+output.xlsx
+
+#ignoring data directories 
+data/
