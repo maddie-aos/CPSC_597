@@ -131,5 +131,7 @@ dmypy.json
 #ignoring excel outputfiles
 output.xlsx
 
-#ignoring data directories 
+#ignoring supporting code /data directories 
 data/
+
+
