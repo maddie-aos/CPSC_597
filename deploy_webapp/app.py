@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request
+import flask
+import pandas as pd
+import tensorflow as tf
+import keras
+from keras.models import load_model
 
 app = Flask(__name__)
 
+#Setting the main pages
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -15,110 +21,138 @@ def future():
     return render_template("future.html")
 
 
-#Present distributions
+#Selecting Species in the Present
 @app.route("/cit_sor_pres")
 def cit_sor_pres():
     return render_template("cit_sor_pres.html")
-
-@app.route("/cit_sor_dist")
-def cit_sor_dist():
-    return render_template("cit_sor_dist.html")
 
 @app.route("/eng_mor_pres")
 def eng_mor_pres():
     return render_template("eng_mor_pres.html")
 
-@app.route("/eng_mor_dist")
-def eng_mor_dist():
-    return render_template("eng_mor_dist.html")
-
 @app.route("/par_cal_pres")
 def par_cal_pres():
     return render_template("par_cal_pres.html")
-
-@app.route("/par_cal_dist")
-def par_cal_dist():
-    return render_template("par_cal_dist.html")
 
 @app.route("/sco_jap_pres")
 def sco_jap_pres():
     return render_template("sco_jap_pres.html")
 
-@app.route("/sco_jap_dist")
-def sco_jap_dist():
-    return render_template("sco_jap_dist.html")
-
 @app.route("/thu_ala_pres")
 def thu_ala_pres():
     return render_template("thu_ala_pres.html")
 
-@app.route("/thu_ala_dist")
-def thu_ala_dist():
-    return render_template("thu_ala_dist.html")
-
 @app.route("/xip_gla_pres")
 def xip_gla_pres():
     return render_template("xip_gla_pres.html")
+
+
+#Selecting Species in the Future
+@app.route("/cit_sor_fut")
+def cit_sor_fut():
+    return render_template("cit_sor_fut.html")
+
+@app.route("/eng_mor_fut")
+def eng_mor_fut():
+    return render_template("eng_mor_fut.html")
+
+@app.route("/par_cal_fut")
+def par_cal_fut():
+    return render_template("par_cal_fut.html")
+
+@app.route("/sco_jap_fut")
+def sco_jap_fut():
+    return render_template("sco_jap_fut.html")
+
+@app.route("/thu_ala_fut")
+def thu_ala_fut():
+    return render_template("thu_ala_fut.html")
+
+@app.route("/xip_gla_fut")
+def xip_gla_fut():
+    return render_template("xip_gla_fut.html")
+
+
+#Present Distribution Pages
+@app.route("/cit_sor_dist")
+def cit_sor_dist():
+    return render_template("cit_sor_dist.html")
+
+@app.route("/eng_mor_dist")
+def eng_mor_dist():
+    return render_template("eng_mor_dist.html")
+
+@app.route("/par_cal_dist")
+def par_cal_dist():
+    return render_template("par_cal_dist.html")
+
+@app.route("/sco_jap_dist")
+def sco_jap_dist():
+    return render_template("sco_jap_dist.html")
+
+@app.route("/thu_ala_dist")
+def thu_ala_dist():
+    return render_template("thu_ala_dist.html")
 
 @app.route("/xip_gla_dist")
 def xip_gla_dist():
     return render_template("xip_gla_dist.html")
 
 
-#Future Distributions
-@app.route("/cit_sor_fut")
-def cit_sor_fut():
-    return render_template("cit_sor_fut.html")
-
+#Future Distributions Pages
 @app.route("/cit_sor_fut_dist")
 def cit_sor_fut__dist():
     return render_template("cit_sor_fut_dist.html")
-
-@app.route("/eng_mor_fut")
-def eng_mor_fut():
-    return render_template("eng_mor_fut.html")
 
 @app.route("/eng_mor_fut_dist")
 def eng_mor_fut_dist():
     return render_template("eng_mor_fut_dist.html")
 
-@app.route("/par_cal_fut")
-def par_cal_fut():
-    return render_template("par_cal_fut.html")
-
 @app.route("/par_cal_fut_dist")
 def par_cal_fut_dist():
     return render_template("par_cal_fut_dist.html")
-
-
-@app.route("/sco_jap_fut")
-def sco_jap_fut():
-    return render_template("sco_jap_fut.html")
 
 @app.route("/sco_jap_fut_dist")
 def sco_jap_fut_dist():
     return render_template("sco_jap_fut_dist.html")
 
-
-@app.route("/thu_ala_fut")
-def thu_ala_fut():
-    return render_template("thu_ala_fut.html")
-
 @app.route("/thu_ala_fut_dist")
 def thu_ala_fut_dist():
     return render_template("thu_ala_fut_dist.html")
-
-
-@app.route("/xip_gla_fut")
-def xip_gla_fut():
-    return render_template("xip_gla_fut.html")
 
 @app.route("/xip_gla_fut_dist")
 def xip_gla_fut_dist():
     return render_template("xip_gla_fut_dist.html")
 
 
-#loading keras models
+#loading keras models: present
+#def load_cit_sor_model():
+#    load_cit_sor_model = load_model('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.h5')
+
+
+
+
+
+#loading keras models: future
+#def load_cit_sor_model_future():
+#s    load_cit_sor_model = load_model('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.h5')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Predictions: Present
 @app.route("/cit_sor_pred")
 def cit_sor_pred():
     return render_template("cit_sor_pred.html")
@@ -144,7 +178,7 @@ def xip_gla_pred():
     return render_template("xip_gla_pred.html")
 
 
-#Future
+#Predictions: Future
 @app.route("/cit_sor_fut_pred")
 def cit_sor_fut_pred():
     return render_template("cit_sor_fut_pred.html")
