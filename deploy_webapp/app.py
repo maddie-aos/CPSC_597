@@ -3,9 +3,117 @@ import flask
 import pandas as pd
 import tensorflow as tf
 import keras
-from keras.models import load_model
+from keras.models import load_model , model_from_json
+from keras.optimizers import Adam
 
 app = Flask(__name__)
+
+#loading keras models: present
+def load_cit_sor_model():
+    json_file = open('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.json')
+    loaded_model_csor = json_file.read()
+    json_file.close()
+    load_cit_sor_model = model_from_json(loaded_model_csor)
+    load_cit_sor_model.load_weights('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.h5')
+    load_cit_sor_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+ 
+def load_eng_mor_model():
+    json_file = open('results/fish/Engraulis_mordax/Engraulis_mordax_model.json')
+    loaded_model_emor = json_file.read()
+    json_file.close()
+    load_eng_mor_model = model_from_json(loaded_model_emor)
+    load_eng_mor_model.load_weights('results/fish/Engraulis_mordax/Engraulis_mordax_model.h5')
+    load_eng_mor_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+
+def load_par_cal_model():
+    json_file = open('results/fish/Paralichthys_californicus/Paralichthys_californicus_model.json')
+    loaded_model_pcal = json_file.read()
+    json_file.close()
+    load_par_cal_model = model_from_json(loaded_model_pcal)
+    load_par_cal_model.load_weights('results/fish/Paralichthys_californicus/Paralichthys_californicus_model.h5')
+    load_par_cal_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+
+def load_sco_jap_model():
+    json_file = open('results/fish/Scomber_japonicus/Scomber_japonicus_model.json')
+    loaded_model_sjap = json_file.read()
+    json_file.close()
+    load_sco_jap_model = model_from_json(loaded_model_sjap)
+    load_sco_jap_model.load_weights('results/fish/Scomber_japonicus/Scomber_japonicus_model.h5')
+    load_sco_jap_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_thu_ala_model():
+    json_file = open('results/fish/Thunnus_alalunga/Thunnus_alalunga_model.json')
+    loaded_model_tala = json_file.read()
+    json_file.close()
+    load_thu_ala_model = model_from_json(loaded_model_tala)
+    load_thu_ala_model.load_weights('results/fish/Thunnus_alalunga/Thunnus_alalunga_model.h5')
+    load_thu_ala_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_xip_gla_model():
+    json_file = open('results/fish/Xiphias_gladius/Xiphias_gladius_model.json')
+    loaded_model_xgla = json_file.read()
+    json_file.close()
+    load_xip_gla_model = model_from_json(loaded_model_xgla)
+    load_xip_gla_model.load_weights('results/fish/Xiphias_gladius/Xiphias_gladius_model.h5')
+    load_xip_gla_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+
+
+#loading keras models: future
+def load_cit_sor_model_future():
+    json_file = open('results/fish_future/Citharichthys_sordidus/Citharichthys_sordidus_future_model.json')
+    loaded_model_csorf = json_file.read()
+    json_file.close()
+    load_cit_sor_model_future = model_from_json(loaded_model_csorf)
+    load_cit_sor_model_future.load_weights('results/fish_future/Citharichthys_sordidus/Citharichthys_sordidus_future_model.h5')
+    load_cit_sor_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_eng_mor_model_future():
+    json_file = open('results/fish_future/Engraulis_mordax/Engraulis_mordax_future_model.json')
+    loaded_model_emorf = json_file.read()
+    json_file.close()
+    load_eng_mor_model_future = model_from_json(loaded_model_emorf)
+    load_eng_mor_model_future.load_weights('results/fish_future/Engraulis_mordax/Engraulis_mordax_future_model.h5')
+    load_eng_mor_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_par_cal_model_future():
+    json_file = open('results/fish_future/Paralichthys_californicus/Paralichthys_californicus_future_model.json')
+    loaded_model_pcalf = json_file.read()
+    json_file.close()
+    load_par_cal_model_future = model_from_json(loaded_model_pcalf)
+    load_par_cal_model_future.load_weights('results/fish_future/Paralichthys_californicus/Paralichthys_californicus_future_model.h5')
+    load_par_cal_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_sco_jap_model_future():
+    json_file = open('results/fish_future/Scomber_japonicus/Scomber_japonicus_future_model.json')
+    loaded_model_sjapf = json_file.read()
+    json_file.close()
+    load_sco_jap_model_future = model_from_json(loaded_model_sjapf)
+    load_sco_jap_model_future.load_weights('results/fish_future/Scomber_japonicus/Scomber_japonicus_future_model.h5')
+    load_sco_jap_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_thu_ala_model_future():
+    json_file = open('results/fish_future/Thunnus_alalunga/Thunnus_alalunga_future_model.json')
+    loaded_model_talaf = json_file.read()
+    json_file.close()
+    load_thu_ala_model_future = model_from_json(loaded_model_talaf)
+    load_thu_ala_model_future.load_weights('results/fish_future/Thunnus_alalunga/Thunnus_alalunga_future_model.h5')
+    load_thu_ala_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+def load_xip_gla_model_future():
+    json_file = open('results/fish_future/Xiphias_gladius/Xiphias_gladius_future_model.json')
+    loaded_model_xglaf = json_file.read()
+    json_file.close()
+    load_xip_gla_model_future = model_from_json(loaded_model_xglaf)
+    load_xip_gla_model_future.load_weights('results/fish_future/Xiphias_gladius/Xiphias_gladius_future_model.h5')
+    load_xip_gla_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+
+
+
+
 
 #Setting the main pages
 @app.route("/")
@@ -125,33 +233,6 @@ def xip_gla_fut_dist():
     return render_template("xip_gla_fut_dist.html")
 
 
-#loading keras models: present
-#def load_cit_sor_model():
-#    load_cit_sor_model = load_model('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.h5')
-
-
-
-
-
-#loading keras models: future
-#def load_cit_sor_model_future():
-#s    load_cit_sor_model = load_model('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.h5')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Predictions: Present
 @app.route("/cit_sor_pred")
 def cit_sor_pred():
@@ -179,9 +260,17 @@ def xip_gla_pred():
 
 
 #Predictions: Future
-@app.route("/cit_sor_fut_pred")
+@app.route("/cit_sor_fut_pred", methods = ['GET', 'POST'])
 def cit_sor_fut_pred():
     return render_template("cit_sor_fut_pred.html")
+def predict():
+    if request.method == "POST":
+        latitude = request.form.get('changelatitude')
+        longitude = request.form.get('changelongitude')
+        return "Your coordinates are "+latitude + longitude
+    #return render_template("cit_sor_fut_pred.html")
+    
+
 
 @app.route("/eng_mor_fut_pred")
 def eng_mor_fut_pred():
@@ -208,3 +297,4 @@ def xip_gla_fut_pred():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
