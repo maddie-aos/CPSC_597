@@ -269,7 +269,7 @@ def predict():
         longitude = request.form.get('changelongitude')
         return "Your coordinates are "+latitude + longitude
     #return render_template("cit_sor_fut_pred.html")
-    
+    #I NEED HELP HERRREEEEEEEEEEEE ALEX
 
 
 @app.route("/eng_mor_fut_pred")
