@@ -248,20 +248,18 @@ def predict_csor():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            csor_metric  = eval_pres.iloc[0]
-            csor_metric = csor_metric.to_frame()
-            result = csor_metric.append(resultdf)
-            result = result.to_string()
-        
-            return result
-        else: 
-            return "Land Coordinate!"
-    else:
-        return "Invalid Entry!"
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
 
+            if val <=0:
+                return render_template('cit_sor_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
+        else: 
+            return render_template('land_coord.html')
+    else:
+        return render_template('invalid.html')
 @app.route("/eng_mor_pred")
 def eng_mor_pred():
     return render_template("eng_mor_pred.html")
@@ -354,18 +352,18 @@ def predict_emor():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            emor_metric  = eval_pres.iloc[1]
-            emor_metric= emor_metric.to_frame()
-            result = emor_metric.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('eng_mor_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
 
 @app.route("/par_cal_pred")
 def par_cal_pred():
@@ -460,18 +458,18 @@ def predict_pcal():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            pcal_metric  = eval_pres.iloc[2]
-            pcal_metric= pcal_metric.to_series()
-            result = pcal_metric.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('par_cal_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
 
 @app.route("/sco_jap_pred")
 def sco_jap_pred():
@@ -566,17 +564,18 @@ def predict_sjap():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            sjap_metric= sjap_metric.to_frame()
-            result = sjap_metric.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('sco_jap_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
     
 @app.route("/thu_ala_pred")
 def thu_ala_pred():
@@ -671,18 +670,18 @@ def predict_tala():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            tala_metric  = eval_pres.iloc[4]
-            tala_metric= tala_metric.to_frame()
-            result = tala_metric.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('thu_ala_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
     
 @app.route("/xip_gla_pred")
 def xip_gla_pred():
@@ -777,19 +776,18 @@ def predict_xgla():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            xgla_metric  = eval_pres.iloc[5]
-            xgla_metric= xgla_metric.to_frame()
-            result = xgla_metric.append(resultdf)
-            result = result.to_string()
-            return result
-        else: 
-            return "Land Coordinate!"
-    else:
-        return "Invalid Entry!"
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
 
+            if val <=0:
+                return render_template('xip_gla_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
+        else: 
+            return render_template('land_coord.html')
+    else:
+        return render_template('invalid.html')
 #Predictions: Future
 @app.route("/cit_sor_fut_pred")
 def cit_sor_fut_pred():
@@ -885,18 +883,18 @@ def predict_csorf():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            csor_metric_future  = eval_fut.iloc[0]
-            csor_metric_future = csor_metric_future.to_frame()
-            result = csor_metric_future.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('cit_sor_fut_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"  
+            return render_template('land_coord.html')
     else:
-        return "Invalid Input"
+        return render_template('invalid.html')
 
 @app.route("/eng_mor_fut_pred")
 def eng_mor_fut_pred():
@@ -992,18 +990,18 @@ def predict_emorf():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            emor_metric_future  = eval_fut.iloc[1]
-            emor_metric_future = emor_metric_future.to_frame()
-            result = emor_metric_future.append(resultdf)
-            result  = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('eng_mor_fut_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
 
 @app.route("/par_cal_fut_pred")
 def par_cal__fut_pred():
@@ -1100,18 +1098,18 @@ def predict_pcalf():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            pcal_metric_future  = eval_fut.iloc[2]
-            pcal_metric_future = pcal_metric_future.to_frame()
-            result  = pcal_metric_future.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('par_cal_fut_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
 
 @app.route("/sco_jap_fut_pred")
 def sco_jap_fut_pred():
@@ -1206,18 +1204,18 @@ def predict_sjapf():
                 new_value=i[1]
                 new_band_values.append(new_value)
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            sjap_metric_future  = eval_fut.iloc[3]
-            sjap_metric_future = sjap_metric_future.to_frame()
-            result = sjap_metric_future.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('sco_jap_fut_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
 
 @app.route("/thu_ala_fut_pred")
 def thu_ala_fut_pred():
@@ -1313,19 +1311,21 @@ def predict_talaf():
             for i in new_values:
                 new_value=i[1]
                 new_band_values.append(new_value)
+
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
-            tala_metric_future  = eval_fut.iloc[4]
-            tala_metric_future = tala_metric_future.to_frame()
-            result = tala_metric_future.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('thu_ala_fut_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
+    
 
 @app.route("/xip_gla_fut_pred")
 def xip_gla_fut_pred():
@@ -1419,19 +1419,21 @@ def predict_xglaf():
             for i in new_values:
                 new_value=i[1]
                 new_band_values.append(new_value)
+                
             new_band_values=np.array(new_band_values)
-            
-            my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])    
-            xgla_metric_future  = eval_fut.iloc[5]
-            xgla_metric_future = xgla_metric_future.to_frame()
-            result = xgla_metric_future.append(resultdf)
-            result = result.to_string()
-            return result
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+
+            if val <=0:
+                return render_template('xip_gla_fut_pred.html')
+            else:
+                return render_template('results.html', pred=str(val))
         else: 
-            return "Land Coordinate!"
+            return render_template('land_coord.html')
     else:
-        return "Invalid Entry!"
+        return render_template('invalid.html')
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
