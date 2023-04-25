@@ -169,7 +169,7 @@ def predict_csor():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -277,7 +277,7 @@ def predict_emor():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -384,7 +384,7 @@ def predict_pcal():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -492,7 +492,7 @@ def predict_sjap():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -600,7 +600,7 @@ def predict_tala():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -708,7 +708,7 @@ def predict_xgla():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -818,7 +818,7 @@ def predict_csorf():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
@@ -927,7 +927,7 @@ def predict_emorf():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
@@ -1036,7 +1036,7 @@ def predict_pcalf():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
 
     if not df.empty:
@@ -1146,7 +1146,7 @@ def predict_sjapf():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
@@ -1255,7 +1255,7 @@ def predict_talaf():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
@@ -1364,7 +1364,7 @@ def predict_xglaf():
     df = pd.DataFrame(items)
 
     df = df[ (df['deci_lat']< 180.) & (df['deci_lat'] > -180.)]
-    df = df[ (df['deci_lon']< 90.) & (df['deci_lat'] > -90.) ]
+    df = df[ (df['deci_lon']< 90.) & (df['deci_lon'] > -90.) ]
 
     if not df.empty:
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
