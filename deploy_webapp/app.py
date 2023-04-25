@@ -10,118 +10,23 @@ from keras.models import load_model
 import numpy as np
 import rasterio
 from osgeo import gdal, gdal_array
-from shapely.geometry import Point
-import geopandas as gpd
 
 app = Flask(__name__)
-
 #loading keras models: present
-def load_cit_sor_model():
-    json_file = open('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.json')
-    loaded_model_csor = json_file.read()
-    json_file.close()
-    cit_sor_model = model_from_json(loaded_model_csor)
-    cit_sor_model.load_weights('results/fish/Citharichthys_sordidus/Citharichthys_sordidus_model.h5')
-    cit_sor_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
- 
-def load_eng_mor_model():
-    json_file = open('results/fish/Engraulis_mordax/Engraulis_mordax_model.json')
-    loaded_model_emor = json_file.read()
-    json_file.close()
-    eng_mor_model = model_from_json(loaded_model_emor)
-    eng_mor_model.load_weights('results/fish/Engraulis_mordax/Engraulis_mordax_model.h5')
-    eng_mor_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-
-def load_par_cal_model():
-    json_file = open('results/fish/Paralichthys_californicus/Paralichthys_californicus_model.json')
-    loaded_model_pcal = json_file.read()
-    json_file.close()
-    par_cal_model = model_from_json(loaded_model_pcal)
-    par_cal_model.load_weights('results/fish/Paralichthys_californicus/Paralichthys_californicus_model.h5')
-    par_cal_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-
-def load_sco_jap_model():
-    json_file = open('results/fish/Scomber_japonicus/Scomber_japonicus_model.json')
-    loaded_model_sjap = json_file.read()
-    json_file.close()
-    sco_jap_model = model_from_json(loaded_model_sjap)
-    sco_jap_model.load_weights('results/fish/Scomber_japonicus/Scomber_japonicus_model.h5')
-    sco_jap_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_thu_ala_model():
-    json_file = open('results/fish/Thunnus_alalunga/Thunnus_alalunga_model.json')
-    loaded_model_tala = json_file.read()
-    json_file.close()
-    thu_ala_model = model_from_json(loaded_model_tala)
-    thu_ala_model.load_weights('results/fish/Thunnus_alalunga/Thunnus_alalunga_model.h5')
-    thu_ala_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_xip_gla_model():
-    json_file = open('results/fish/Xiphias_gladius/Xiphias_gladius_model.json')
-    loaded_model_xgla = json_file.read()
-    json_file.close()
-    xip_gla_model = model_from_json(loaded_model_xgla)
-    xip_gla_model.load_weights('results/fish/Xiphias_gladius/Xiphias_gladius_model.h5')
-    xip_gla_model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
+cit_sor_model = load_model('deploy_webapp/saved_models/Citharichthys_sordidus.h5')
+eng_mor_model = load_model('deploy_webapp/saved_models/Engraulis_mordax.h5')
+par_cal_model = load_model('deploy_webapp/saved_models/Paralichthys_californicus.h5')
+sco_jap_model = load_model('deploy_webapp/saved_models/Paralichthys_californicus.h5')
+thu_ala_model = load_model('deploy_webapp/saved_models/Thunnus_alalunga.h5')
+xip_gla_model = load_model('deploy_webapp/saved_models/Xiphias_gladius.h5')
 
 #loading keras models: future
-def load_cit_sor_model_future():
-    json_file = open('results/fish_future/Citharichthys_sordidus/Citharichthys_sordidus_future_model.json', 'r')
-    loaded_model_json = json_file.read()
-    json_file.close()
-    global cit_sor_model_future 
-    cit_sor_model_future  = model_from_json(loaded_model_json)
-   
-
-    cit_sor_model_future.load_weights('results/fish_future/Citharichthys_sordidus/Citharichthys_sordidus_future_model.h5')
-    cit_sor_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_eng_mor_model_future():
-    json_file = open('results/fish_future/Engraulis_mordax/Engraulis_mordax_future_model.json')
-    loaded_model_emorf = json_file.read()
-    json_file.close()
-    eng_mor_model_future = model_from_json(loaded_model_emorf)
-    eng_mor_model_future.load_weights('results/fish_future/Engraulis_mordax/Engraulis_mordax_future_model.h5')
-    eng_mor_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_par_cal_model_future():
-    json_file = open('results/fish_future/Paralichthys_californicus/Paralichthys_californicus_future_model.json')
-    loaded_model_pcalf = json_file.read()
-    json_file.close()
-    par_cal_model_future = model_from_json(loaded_model_pcalf)
-    par_cal_model_future.load_weights('results/fish_future/Paralichthys_californicus/Paralichthys_californicus_future_model.h5')
-    par_cal_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_sco_jap_model_future():
-    json_file = open('results/fish_future/Scomber_japonicus/Scomber_japonicus_future_model.json')
-    loaded_model_sjapf = json_file.read()
-    json_file.close()
-    sco_jap_model_future = model_from_json(loaded_model_sjapf)
-    sco_jap_model_future.load_weights('results/fish_future/Scomber_japonicus/Scomber_japonicus_future_model.h5')
-    sco_jap_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_thu_ala_model_future():
-    json_file = open('results/fish_future/Thunnus_alalunga/Thunnus_alalunga_future_model.json')
-    loaded_model_talaf = json_file.read()
-    json_file.close()
-    thu_ala_model_future = model_from_json(loaded_model_talaf)
-    thu_ala_model_future.load_weights('results/fish_future/Thunnus_alalunga/Thunnus_alalunga_future_model.h5')
-    thu_ala_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-def load_xip_gla_model_future():
-    json_file = open('results/fish_future/Xiphias_gladius/Xiphias_gladius_future_model.json')
-    loaded_model_xglaf = json_file.read()
-    json_file.close()
-    xip_gla_model_future = model_from_json(loaded_model_xglaf)
-    xip_gla_model_future.load_weights('results/fish_future/Xiphias_gladius/Xiphias_gladius_future_model.h5')
-    xip_gla_model_future.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-
-
-
+cit_sor_model_future = load_model('deploy_webapp/saved_models/Citharichthys_sordidus_future.h5')
+eng_mor_model_future = load_model('deploy_webapp/saved_models/Engraulis_mordax_future.h5')
+par_cal_model_future = load_model('deploy_webapp/saved_models/Paralichthys_californicus_future.h5')
+sco_jap_model_future = load_model('deploy_webapp/saved_models/Paralichthys_californicus_future.h5')
+thu_ala_model_future = load_model('deploy_webapp/saved_models/Thunnus_alalunga_future.h5')
+xip_gla_model_future = load_model('deploy_webapp/saved_models/Xiphias_gladius_future.h5')
 
 
 #Setting the main pages
@@ -367,7 +272,14 @@ def predict():
         new_band_values.append(new_value)
     new_band_values=np.array(new_band_values)
 
-    return flask.jsonify(new_band_values)
+    my_string = "Predicted Probability: "
+    resultdf = pd.DataFrame(new_band_values, columns=['result'])
+    result_value = resultdf['result'].values[0]
+    result = my_string + str(result_value)
+
+    return result
+
+
 
 @app.route("/eng_mor_fut_pred")
 def eng_mor_fut_pred():

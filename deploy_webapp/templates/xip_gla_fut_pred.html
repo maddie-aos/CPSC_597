@@ -10,8 +10,9 @@
     <h1 align = "center">Enter Latitude and Longitude Data<h1/>
         <div class="button" style="display: block; margin-bottom: 0; margin-right: 10px;">
             <div style="display: flex; justify-content: center; align-items: center; padding-top: 10px;">
-              <input type="text" id="latitudechange" placeholder="Enter Latitude">
-              <input type="text" id="longitudechange" placeholder="Enter Longitude">
+              <form action = "/xip_gla_fut_pred" method = "post" class = "info">
+              <input type="text" name="latitudechange" placeholder="Enter Latitude">
+              <input type="text" name="longitudechange" placeholder="Enter Longitude">
               <button class="submit">Predict</button>
             </div>
           </div> 
