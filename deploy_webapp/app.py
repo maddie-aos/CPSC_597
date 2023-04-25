@@ -180,7 +180,7 @@ def cit_sor_fut_pred():
     return render_template("cit_sor_fut_pred.html")
 
 @app.route("/cit_sor_fut_pred", methods = ['POST'])
-def predict():
+def predict_csorf():
     #taking in user input, making a dataframe
     lat = request.form.get('latitudechange')
     latitude = float(lat)
@@ -286,7 +286,7 @@ def eng_mor_fut_pred():
     return render_template("eng_mor_fut_pred.html")
 
 @app.route("/eng_mor_fut_pred", methods = ['POST'])
-def predict():
+def predict_emorf():
     #taking in user input, making a dataframe
     lat = request.form.get('latitudechange')
     latitude = float(lat)
@@ -390,7 +390,7 @@ def par_cal__fut_pred():
     return render_template("par_cal_fut_pred.html")
 
 @app.route("/par_cal_fut_pred", methods = ['POST'])
-def predict():
+def predict_pcalf():
     #taking in user input, making a dataframe
     lat = request.form.get('latitudechange')
     latitude = float(lat)
@@ -494,7 +494,7 @@ def sco_jap_fut_pred():
     return render_template("sco_jap_fut_pred.html")
 
 @app.route("/sco_jap_fut_pred", methods = ['POST'])
-def predict():
+def predict_sjapf():
     #taking in user input, making a dataframe
     lat = request.form.get('latitudechange')
     latitude = float(lat)
@@ -598,7 +598,7 @@ def thu_ala_fut_pred():
     return render_template("thu_ala_fut_pred.html")
 
 @app.route("/thu_ala_fut_pred", methods = ['POST'])
-def predict():
+def predict_talaf():
     #taking in user input, making a dataframe
     lat = request.form.get('latitudechange')
     latitude = float(lat)
@@ -702,7 +702,7 @@ def xip_gla_fut_pred():
     return render_template("xip_gla_fut_pred.html")
 
 @app.route("/xip_gla_fut_pred", methods = ['POST'])
-def predict():
+def predict_xglaf():
     #taking in user input, making a dataframe
     lat = request.form.get('latitudechange')
     latitude = float(lat)
