@@ -219,47 +219,47 @@ def predict_csor():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/csor_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/csor_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = cit_sor_model.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        csor_metric  = eval_pres.iloc[0]
-        csor_metric= csor_metric.to_string()
-
-        result = p_value + csor_metric
-        
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/csor_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/csor_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = cit_sor_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            csor_metric  = eval_pres.iloc[0]
+            csor_metric= csor_metric.to_string()
+            result = p_value + csor_metric
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -325,49 +325,48 @@ def predict_emor():
         
         df=pd.DataFrame(X)
         df=df.T
-        
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/emor_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/emor_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/emor_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = eng_mor_model.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        emor_metric  = eval_pres.iloc[1]
-        emor_metric= emor_metric.to_string()
-
-        result = p_value + emor_metric
-
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/emor_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/emor_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/emor_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = eng_mor_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            emor_metric  = eval_pres.iloc[1]
+            emor_metric= emor_metric.to_string()
+            result = p_value + emor_metric
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -435,47 +434,47 @@ def predict_pcal():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/pcal_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/pcal_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/pcal_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = par_cal_model.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        pcal_metric  = eval_pres.iloc[2]
-        pcal_metric= pcal_metric.to_string()
-
-        result = p_value + pcal_metric
-        
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/pcal_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/pcal_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/pcal_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = par_cal_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            pcal_metric  = eval_pres.iloc[2]
+            pcal_metric= pcal_metric.to_string()
+            result = p_value + pcal_metric
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -543,47 +542,47 @@ def predict_sjap():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/sjap_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sjap_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/sjap_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = sco_jap_model.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        sjap_metric  = eval_pres.iloc[3]
-        sjap_metric = sjap_metric.to_string()
-
-        result = p_value + sjap_metric
-        
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/sjap_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sjap_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/sjap_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = sco_jap_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            sjap_metric  = eval_pres.iloc[3]
+            sjap_metric= sjap_metric.to_string()
+            result = p_value + sjap_metric
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
     
@@ -651,47 +650,47 @@ def predict_tala():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/tala_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/tala_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/tala_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = thu_ala_model.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        tala_metric  = eval_pres.iloc[4]
-        tala_metric= tala_metric.to_string()
-
-        result = p_value + tala_metric
-        
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/tala_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/tala_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/tala_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = thu_ala_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            tala_metric  = eval_pres.iloc[4]
+            tala_metric= tala_metric.to_string()
+            result = p_value + tala_metric
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
     
@@ -759,45 +758,47 @@ def predict_xgla():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/xgla_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sgla_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/xgla_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = xip_gla_model.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        xgla_metric  = eval_pres.iloc[5]
-        xgla_metric= xgla_metric.to_string()
-
-        result = p_value + xgla_metric
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/xgla_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/xgla_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/xgla_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = xip_gla_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            xgla_metric  = eval_pres.iloc[5]
+            xgla_metric= xgla_metric.to_string()
+            result = p_value + xgla_metric
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -867,51 +868,49 @@ def predict_csorf():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/csor_future_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor_future_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/csor_future_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = cit_sor_model_future.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        csor_metric_future  = eval_fut.iloc[0]
-        csor_metric_future= csor_metric_future.to_string()
-
-        result = p_value + csor_metric_future
-        
-        return result  
-        
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/csor_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor__future_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/csor_future_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = cit_sor_model_future.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            csor_metric_future  = eval_fut.iloc[0]
+            csor_metric_future = csor_metric_future.to_string()
+            result = p_value + csor_metric_future
+            return result
+        else: 
+            return "Land Coordinate!"  
     else:
         return "Invalid Input"
-
 
 @app.route("/eng_mor_fut_pred")
 def eng_mor_fut_pred():
@@ -978,47 +977,47 @@ def predict_emorf():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/emor_future_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/emor_future_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/emor_future_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = eng_mor_model_future.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        emor_metric_future  = eval_fut.iloc[1]
-        emor_metric_future= emor_metric_future.to_string()
-
-        result = p_value + emor_metric_future
-        
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/emor_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/emor__future_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/emor_future_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = eng_mor_model_future.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            emor_metric_future  = eval_fut.iloc[1]
+            emor_metric_future = emor_metric_future.to_string()
+            result = p_value + emor_metric_future
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -1088,48 +1087,47 @@ def predict_pcalf():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/pcal_future_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/pcal_future_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/pcal_future_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = par_cal_model_future.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        pcal_metric_future  = eval_fut.iloc[2]
-        pcal_metric_future= pcal_metric_future.to_string()
-
-        result = p_value + pcal_metric_future
-
-        return result
-        
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/pcal_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/pcal__future_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/pcal_future_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = par_cal_model_future.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            pcal_metric_future  = eval_fut.iloc[2]
+            pcal_metric_future = pcal_metric_future.to_string()
+            result = p_value + pcal_metric_future
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -1196,49 +1194,48 @@ def predict_sjapf():
         
         df=pd.DataFrame(X)
         df=df.T
-        
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/sjap_future_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sjap_future_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/sjap_future_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = sco_jap_model_future.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        sjap_metric_future  = eval_fut.iloc[3]
-        sjap_metric_future= sjap_metric_future.to_string()
-
-        result = p_value + sjap_metric_future
-
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/sjap_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sjap__future_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/sjap_future_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = sco_jap_model_future.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            sjap_metric_future  = eval_fut.iloc[3]
+            sjap_metric_future = sjap_metric_future.to_string()
+            result = p_value + sjap_metric_future
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -1308,48 +1305,47 @@ def predict_talaf():
         df=df.T
         
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/tala_future_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/tala_future_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/tala_future_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = thu_ala_model_future.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        
-        p_value = my_string + str(result_value)
 
-        tala_metric_future  = eval_fut.iloc[4]
-        tala_metric_future= tala_metric_future.to_string()
-
-        result = p_value + tala_metric_future
-
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/tala_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/tala__future_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/tala_future_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = thu_ala_model_future.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            tala_metric_future  = eval_fut.iloc[4]
+            tala_metric_future = tala_metric_future.to_string()
+            result = p_value + tala_metric_future
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
@@ -1416,49 +1412,48 @@ def predict_xglaf():
         
         df=pd.DataFrame(X)
         df=df.T
-        
         df=df.dropna(axis=0, how='any')
-        input_X=df.loc[:,0:8]
-        
-        row=df[9]
-        col=df[10]
-        
-        row_col=pd.DataFrame({"row":row,"col":col})
-        
-        input_X=input_X.values
-        
-        row=row.values
-        col=col.values
-        
-        prediction_array=np.save('deploy_webapp/predictions/xgla_future_prediction_array.npy',input_X)
-        prediction_pandas=row_col.to_csv('deploy_webapp/predictions/xgla_future_prediction_row_col.csv')
-        
-        input_X=np.load('deploy_webapp/predictions/xgla_future_prediction_array.npy')
-        df=pd.DataFrame(input_X)
-        
-        new_band=myarray[1].copy()
-        new_band.shape
-        
-        new_values = xip_gla_model_future.predict(x=input_X,verbose=0) ###predict output value
-        
-        new_band_values=[]
-        
-        for i in new_values:
-            new_value=i[1]
-            new_band_values.append(new_value)
-        new_band_values=np.array(new_band_values)
-        
-        my_string = "Predicted Probability: "
-        resultdf = pd.DataFrame(new_band_values, columns=['result'])
-        result_value = resultdf['result'].values[0]
-        p_value = my_string + str(result_value)
 
-        xgla_metric_future  = eval_fut.iloc[5]
-        xgla_metric_future= xgla_metric_future.to_string()
-
-        result = p_value + xgla_metric_future
-
-        return result
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/xgla_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/xgla__future_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/xgla_future_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = xip_gla_model_future.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            
+            my_string = "Predicted Probability: "
+            resultdf = pd.DataFrame(new_band_values, columns=['result'])
+            result_value = resultdf['result'].values[0]
+            p_value = my_string + str(result_value)
+            
+            xgla_metric_future  = eval_fut.iloc[5]
+            xgla_metric_future = xgla_metric_future.to_string()
+            result = p_value + xgla_metric_future
+            return result
+        else: 
+            return "Land Coordinate!"
     else:
         return "Invalid Entry!"
 
