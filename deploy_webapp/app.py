@@ -250,13 +250,12 @@ def predict_csor():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             csor_metric  = eval_pres.iloc[0]
-            csor_metric= csor_metric.to_string()
-            result = p_value + csor_metric
+            csor_metric = csor_metric.to_frame()
+            result = csor_metric.append(resultdf)
+            result = result.to_string()
+        
             return result
         else: 
             return "Land Coordinate!"
@@ -357,13 +356,11 @@ def predict_emor():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             emor_metric  = eval_pres.iloc[1]
-            emor_metric= emor_metric.to_string()
-            result = p_value + emor_metric
+            emor_metric= emor_metric.to_frame()
+            result = emor_metric.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -465,13 +462,11 @@ def predict_pcal():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             pcal_metric  = eval_pres.iloc[2]
-            pcal_metric= pcal_metric.to_string()
-            result = p_value + pcal_metric
+            pcal_metric= pcal_metric.to_series()
+            result = pcal_metric.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -573,13 +568,10 @@ def predict_sjap():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
-            sjap_metric  = eval_pres.iloc[3]
-            sjap_metric= sjap_metric.to_string()
-            result = p_value + sjap_metric
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
+            sjap_metric= sjap_metric.to_frame()
+            result = sjap_metric.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -682,12 +674,10 @@ def predict_tala():
             
             my_string = "Predicted Probability: "
             resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
             tala_metric  = eval_pres.iloc[4]
-            tala_metric= tala_metric.to_string()
-            result = p_value + tala_metric
+            tala_metric= tala_metric.to_frame()
+            result = tala_metric.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -789,13 +779,11 @@ def predict_xgla():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             xgla_metric  = eval_pres.iloc[5]
-            xgla_metric= xgla_metric.to_string()
-            result = p_value + xgla_metric
+            xgla_metric= xgla_metric.to_frame()
+            result = xgla_metric.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -899,13 +887,11 @@ def predict_csorf():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             csor_metric_future  = eval_fut.iloc[0]
-            csor_metric_future = csor_metric_future.to_string()
-            result = p_value + csor_metric_future
+            csor_metric_future = csor_metric_future.to_frame()
+            result = csor_metric_future.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"  
@@ -1008,13 +994,11 @@ def predict_emorf():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             emor_metric_future  = eval_fut.iloc[1]
-            emor_metric_future = emor_metric_future.to_string()
-            result = p_value + emor_metric_future
+            emor_metric_future = emor_metric_future.to_frame()
+            result = emor_metric_future.append(resultdf)
+            result  = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -1118,13 +1102,11 @@ def predict_pcalf():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             pcal_metric_future  = eval_fut.iloc[2]
-            pcal_metric_future = pcal_metric_future.to_string()
-            result = p_value + pcal_metric_future
+            pcal_metric_future = pcal_metric_future.to_frame()
+            result  = pcal_metric_future.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -1226,13 +1208,11 @@ def predict_sjapf():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             sjap_metric_future  = eval_fut.iloc[3]
-            sjap_metric_future = sjap_metric_future.to_string()
-            result = p_value + sjap_metric_future
+            sjap_metric_future = sjap_metric_future.to_frame()
+            result = sjap_metric_future.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -1336,13 +1316,11 @@ def predict_talaf():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])
             tala_metric_future  = eval_fut.iloc[4]
-            tala_metric_future = tala_metric_future.to_string()
-            result = p_value + tala_metric_future
+            tala_metric_future = tala_metric_future.to_frame()
+            result = tala_metric_future.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
@@ -1444,13 +1422,11 @@ def predict_xglaf():
             new_band_values=np.array(new_band_values)
             
             my_string = "Predicted Probability: "
-            resultdf = pd.DataFrame(new_band_values, columns=['result'])
-            result_value = resultdf['result'].values[0]
-            p_value = my_string + str(result_value)
-            
+            resultdf = pd.DataFrame(new_band_values, index=['predicted_result'])    
             xgla_metric_future  = eval_fut.iloc[5]
-            xgla_metric_future = xgla_metric_future.to_string()
-            result = p_value + xgla_metric_future
+            xgla_metric_future = xgla_metric_future.to_frame()
+            result = xgla_metric_future.append(resultdf)
+            result = result.to_string()
             return result
         else: 
             return "Land Coordinate!"
