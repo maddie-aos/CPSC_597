@@ -162,6 +162,11 @@ def predict_csor():
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
 
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
+
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
     myarray=inRas.ReadAsArray()
@@ -265,6 +270,11 @@ def predict_emor():
     longitude = float(lon)
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
+
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
 
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -370,6 +380,11 @@ def predict_pcal():
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
 
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
+
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
     myarray=inRas.ReadAsArray()
@@ -473,6 +488,11 @@ def predict_sjap():
     longitude = float(lon)
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
+
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
 
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -578,6 +598,11 @@ def predict_tala():
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
 
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
+
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
     myarray=inRas.ReadAsArray()
@@ -681,6 +706,11 @@ def predict_xgla():
     longitude = float(lon)
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
+
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
 
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
@@ -787,6 +817,11 @@ def predict_csorf():
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
 
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
+
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
     myarray=inRas.ReadAsArray()
@@ -877,8 +912,6 @@ def predict_csorf():
 
     return result
 
-
-
 @app.route("/eng_mor_fut_pred")
 def eng_mor_fut_pred():
     return render_template("eng_mor_fut_pred.html")
@@ -892,6 +925,11 @@ def predict_emorf():
     longitude = float(lon)
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
+
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
 
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
@@ -997,6 +1035,11 @@ def predict_pcalf():
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
 
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
+
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
     myarray=inRas.ReadAsArray()
@@ -1101,6 +1144,11 @@ def predict_sjapf():
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
 
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
+
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
     myarray=inRas.ReadAsArray()
@@ -1204,6 +1252,11 @@ def predict_talaf():
     longitude = float(lon)
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
+    
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
 
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
@@ -1308,6 +1361,11 @@ def predict_xglaf():
     longitude = float(lon)
     items = {"deci_lat": [latitude], "deci_lon": [longitude]}
     df = pd.DataFrame(items)
+
+    df.drop(df[df['deci_lat'] >= 180].index, inplace = True)
+    df.drop(df[df['deci_lat'] <= -180].index, inplace = True)
+    df.drop(df[df['deci_lon'] >= 90].index, inplace = True)
+    df.drop(df[df['deci_lon'] <= -90].index, inplace = True)
 
     #reading raster and extracting values 
     inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
