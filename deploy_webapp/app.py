@@ -263,6 +263,7 @@ def predict_csor():
             return render_template('land_coord.html')
     else:
         return render_template('invalid.html')
+
 @app.route("/eng_mor_pred")
 def eng_mor_pred():
     return render_template("eng_mor_pred.html")

@@ -12,9 +12,9 @@ body {
     }
    
   p {
-    font-family: Georgia, serif;
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 1.2em;
-    color: DarkSlateGray;
+    color: #161857;
     }
   button {
     font-size: 18px;
