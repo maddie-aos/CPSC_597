@@ -7,7 +7,11 @@
     <title>Results</title>
 </head>
 <body>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
     <h1 align = "left">Results:<h1/>
+    <p>
         {{pred}}% chance of presence
+    </p>
+        
 </body>
 </html>

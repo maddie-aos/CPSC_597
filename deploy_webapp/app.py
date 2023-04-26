@@ -10,8 +10,11 @@ from keras.models import load_model
 import numpy as np
 import rasterio
 from osgeo import gdal, gdal_array
+import os
 
-app = Flask(__name__)
+STATIC_DIR = os.path.abspath('deploy_webapp/static_files')
+
+app = Flask(__name__, static_folder=STATIC_DIR)
 #getting test value data for present
 eval_pres = pd.read_csv('results/DNN_performance/DNN_eval.txt', sep='\t', header=0)
 

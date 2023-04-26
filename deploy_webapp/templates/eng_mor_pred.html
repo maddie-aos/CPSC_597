@@ -7,14 +7,20 @@
     <title>Predict Presence: Northern Anchovy Present</title>
 </head>
 <body>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
     <h1 align = "center">Enter Latitude and Longitude Data<h1/>
         <div class="button" style="display: block; margin-bottom: 0; margin-right: 10px;">
             <div style="display: flex; justify-content: center; align-items: center; padding-top: 10px;">
               <form action = "/eng_mor_pred" method = "post" class = "info">
                 <input type="text" name="latitudechange" placeholder="Enter Latitude">
                 <input type="text" name="longitudechange" placeholder="Enter Longitude">
-                <button class="submit">Predict</button>
             </div>
           </div> 
+          <div class="button" style="display: block; margin-bottom: 0; margin-right: 10px;">
+            <div style="display: flex; justify-content: center; align-items: center; padding-top: 10px;">
+              <form action = "/eng_mor_pred" method = "post" class = "info">
+                <button class="submit">Predict</button>
+            </div>
+          </div>
 </body>
 </html>

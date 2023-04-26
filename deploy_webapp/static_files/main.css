@@ -1,0 +1,37 @@
+body {
+    /*background: #08185a;*/
+    background-image: url('matt-hardy-unsplash.jpg');
+    background-size: cover;
+    }
+   
+  h1 {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 2.5em;
+    color: #161857;
+    align-items: center;
+    }
+   
+  p {
+    font-family: Georgia, serif;
+    font-size: 1.2em;
+    color: DarkSlateGray;
+    }
+  button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #161857;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+  button:hover {
+    background-color: #1d2082;
+    }  
+    
+
+    
+
+
