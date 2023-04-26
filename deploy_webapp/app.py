@@ -1,26 +1,27 @@
-from flask import Flask, render_template, request
+#importing packages, setting directories
 import flask
+from flask import Flask, render_template, request
 import pandas as pd
 import tensorflow as tf
 import keras
-from keras.models import model_from_json
-import h5py
+import geopandas as gpd
 from keras.optimizers import Adam
 from keras.models import load_model
 import numpy as np
 import rasterio
-from osgeo import gdal, gdal_array
+from osgeo import gdal
 import os
-
+import folium
 STATIC_DIR = os.path.abspath('deploy_webapp/static_files')
 
+#instantiating app 
 app = Flask(__name__, static_folder=STATIC_DIR)
-#getting test value data for present
-eval_pres = pd.read_csv('results/DNN_performance/DNN_eval.txt', sep='\t', header=0)
 
-#getting test value data for future
+#getting value data for metric analysis
+eval_pres = pd.read_csv('results/DNN_performance/DNN_eval.txt', sep='\t', header=0)
 eval_fut= pd.read_csv('results/DNN_performance/DNN_eval_future.txt', sep='\t', header=0)
 
+#globally loading models for the sake of effiency 
 #loading keras models: present
 cit_sor_model = load_model('deploy_webapp/saved_models/Citharichthys_sordidus.h5')
 eng_mor_model = load_model('deploy_webapp/saved_models/Engraulis_mordax.h5')
@@ -107,27 +108,59 @@ def xip_gla_fut():
 #Present Distribution Pages
 @app.route("/cit_sor_dist")
 def cit_sor_dist():
-    return render_template("cit_sor_dist.html")
+    map = folium.Map()
+    info = "Present Distribution of the Pacific Sanddab"
+    gdf = gpd.read_file('data/data_raw/dis_shapefile/cit_sor.shp')
+    folium.GeoJson(data=gdf["geometry"]).add_to(map)
+    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
+    return map._repr_html_()
+
+    #return render_template("cit_sor_dist.html")
 
 @app.route("/eng_mor_dist")
 def eng_mor_dist():
-    return render_template("eng_mor_dist.html")
+    map = folium.Map()
+    info = "Present Distribution of the Northern Anchovy"
+    gdf = gpd.read_file('data/data_raw/dis_shapefile/eng_mor.shp')
+    folium.GeoJson(data=gdf["geometry"]).add_to(map)
+    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
+    return map._repr_html_()
 
 @app.route("/par_cal_dist")
 def par_cal_dist():
-    return render_template("par_cal_dist.html")
+    map = folium.Map()
+    info = "Present Distribution of the California Halibut"
+    gdf = gpd.read_file('data/data_raw/dis_shapefile/par_cal.shp')
+    folium.GeoJson(data=gdf["geometry"]).add_to(map)
+    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
+    return map._repr_html_()
 
 @app.route("/sco_jap_dist")
 def sco_jap_dist():
-    return render_template("sco_jap_dist.html")
+    map = folium.Map()
+    info = "Present Distribution of the Chub Mackerel"
+    gdf = gpd.read_file('data/data_raw/dis_shapefile/sco_jap.shp')
+    folium.GeoJson(data=gdf["geometry"]).add_to(map)
+    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
+    return map._repr_html_()
 
 @app.route("/thu_ala_dist")
 def thu_ala_dist():
-    return render_template("thu_ala_dist.html")
+    map = folium.Map()
+    info = "Present Distribution of the Albacore Tuna"
+    gdf = gpd.read_file('data/data_raw/dis_shapefile/thu_ala.shp')
+    folium.GeoJson(data=gdf["geometry"]).add_to(map)
+    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
+    return map._repr_html_()
 
 @app.route("/xip_gla_dist")
 def xip_gla_dist():
-    return render_template("xip_gla_dist.html")
+    map = folium.Map()
+    info = "Present Distribution of the Pacific Swordfish"
+    gdf = gpd.read_file('data/data_raw/dis_shapefile/xip_gla.shp')
+    folium.GeoJson(data=gdf["geometry"]).add_to(map)
+    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
+    return map._repr_html_()
 
 
 #Future Distributions Pages
@@ -254,11 +287,14 @@ def predict_csor():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('cit_sor_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -359,11 +395,13 @@ def predict_emor():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('eng_mor_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
         else: 
             return render_template('land_coord.html')
     else:
@@ -465,11 +503,13 @@ def predict_pcal():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('par_cal_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
         else: 
             return render_template('land_coord.html')
     else:
@@ -571,11 +611,14 @@ def predict_sjap():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('sco_jap_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -677,11 +720,14 @@ def predict_tala():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('thu_ala_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -783,15 +829,19 @@ def predict_xgla():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('xip_gla_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
         else: 
             return render_template('land_coord.html')
     else:
         return render_template('invalid.html')
+
 #Predictions: Future
 @app.route("/cit_sor_fut_pred")
 def cit_sor_fut_pred():
@@ -890,11 +940,13 @@ def predict_csorf():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('cit_sor_fut_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
         else: 
             return render_template('land_coord.html')
     else:
@@ -997,11 +1049,14 @@ def predict_emorf():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('eng_mor_fut_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -1105,11 +1160,15 @@ def predict_pcalf():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('par_cal_fut_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -1211,11 +1270,14 @@ def predict_sjapf():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('sco_jap_fut_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -1320,11 +1382,15 @@ def predict_talaf():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('thu_ala_fut_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -1428,11 +1494,15 @@ def predict_xglaf():
             resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
             val = resultdf['predicted_result'].values[0]   
             val = val*100
+            vals = str(val)
 
-            if val <=0:
-                return render_template('xip_gla_fut_pred.html')
-            else:
-                return render_template('results.html', pred=str(val))
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude])
+            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
+            return map._repr_html_()
+
+
         else: 
             return render_template('land_coord.html')
     else:
