@@ -115,8 +115,6 @@ def cit_sor_dist():
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
 
-    #return render_template("cit_sor_dist.html")
-
 @app.route("/eng_mor_dist")
 def eng_mor_dist():
     map = folium.Map()
@@ -166,57 +164,28 @@ def xip_gla_dist():
 #Future Distributions Pages
 @app.route("/cit_sor_fut_dist")
 def cit_sor_fut__dist():
-    map = folium.Map()
-    info = "Future Distribution of the Pacific Sanddab"
-    gdf = gpd.read_file('data/modified_data/pred_dist/csor.shp')
-    folium.GeoJson(data=gdf["geometry"]).add_to(map)
-    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
-    return map._repr_html_()
+    return render_template("cit_sor_fut_dist.html")
 
 @app.route("/eng_mor_fut_dist")
 def eng_mor_fut_dist():
-    map = folium.Map()
-    info = "Future Distribution of the Northern Anchovy"
-    gdf = gpd.read_file('data/modified_data/pred_dist/emor.shp')
-    folium.GeoJson(data=gdf["geometry"]).add_to(map)
-    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
-    return map._repr_html_()
+     return render_template("eng_mor_fut_dist.html")
+
 
 @app.route("/par_cal_fut_dist")
 def par_cal_fut_dist():
-    map = folium.Map()
-    info = "Future Distribution of the California Halibut"
-    gdf = gpd.read_file('data/modified_data/pred_dist/pcal.shp')
-    folium.GeoJson(data=gdf["geometry"]).add_to(map)
-    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
-    return map._repr_html_()
+     return render_template("par_cal_fut_dist.html")
 
 @app.route("/sco_jap_fut_dist")
 def sco_jap_fut_dist():
-    map = folium.Map()
-    info = "Future Distribution of the Chub Mackerel"
-    gdf = gpd.read_file('data/modified_data/pred_dist/sjap.shp')
-    folium.GeoJson(data=gdf["geometry"]).add_to(map)
-    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
-    return map._repr_html_()
+     return render_template("sco_jap_fut_dist.html")
 
 @app.route("/thu_ala_fut_dist")
 def thu_ala_fut_dist():
-    map = folium.Map()
-    info = "Future Distribution of the Albacore Tuna"
-    gdf = gpd.read_file('data/modified_data/pred_dist/tala.shp')
-    folium.GeoJson(data=gdf["geometry"]).add_to(map)
-    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
-    return map._repr_html_()
+     return render_template("thu_ala_fut_dist.html")
 
 @app.route("/xip_gla_fut_dist")
 def xip_gla_fut_dist():
-    map = folium.Map()
-    info = "Future Distribution of the Pacific Swordfish"
-    gdf = gpd.read_file('data/modified_data/pred_dist/xgla.shp')
-    folium.GeoJson(data=gdf["geometry"]).add_to(map)
-    folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
-    return map._repr_html_()
+    return render_template("xip_gla_fut_dist.html")
 
 
 #Predictions: Present
