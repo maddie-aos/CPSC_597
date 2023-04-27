@@ -31,7 +31,11 @@ body {
   button:hover {
     background-color: #1d2082;
     }  
-
+  input{
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px; 
+  }
 
     
 

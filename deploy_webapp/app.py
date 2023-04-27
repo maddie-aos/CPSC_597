@@ -170,7 +170,6 @@ def cit_sor_fut__dist():
 def eng_mor_fut_dist():
      return render_template("eng_mor_fut_dist.html")
 
-
 @app.route("/par_cal_fut_dist")
 def par_cal_fut_dist():
      return render_template("par_cal_fut_dist.html")
@@ -1509,5 +1508,5 @@ def predict_xglaf():
     
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
     
