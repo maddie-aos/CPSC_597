@@ -289,9 +289,11 @@ def predict_csor():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/csor_map.html')
+            return render_template('csor_map.html')
+            #return map._repr_html_()
 
         else: 
             return render_template('land_coord.html')
@@ -397,9 +399,15 @@ def predict_emor():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/emor_map.html')
+
+            return render_template('emor_map.html')
+            #return map._repr_html_()
+        
+
+
         else: 
             return render_template('land_coord.html')
     else:
@@ -505,9 +513,13 @@ def predict_pcal():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/pcal_map.html')
+
+            return render_template('pcal_map.html')
+
+            #return map._repr_html_()
         else: 
             return render_template('land_coord.html')
     else:
@@ -613,9 +625,14 @@ def predict_sjap():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/sjap_map.html')
+
+            return render_template('sjap_map.html')
+
+
+            #return map._repr_html_()
 
         else: 
             return render_template('land_coord.html')
@@ -722,9 +739,14 @@ def predict_tala():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/tala_map.html')
+
+            return render_template('tala_map.html')
+
+
+            #return map._repr_html_()
 
         else: 
             return render_template('land_coord.html')
@@ -831,9 +853,12 @@ def predict_xgla():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/xgla_map.html')
+
+            return render_template('xgla_map.html')
+            #return map._repr_html_()
 
         else: 
             return render_template('land_coord.html')
@@ -942,9 +967,14 @@ def predict_csorf():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/csorf_map.html')
+
+            return render_template('csorf_map.html')
+
+
+            #return map._repr_html_()
         else: 
             return render_template('land_coord.html')
     else:
@@ -1051,9 +1081,12 @@ def predict_emorf():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/emorf_map.html')
+
+            return render_template('emorf_map.html')
+            #return map._repr_html_()
 
         else: 
             return render_template('land_coord.html')
@@ -1162,11 +1195,11 @@ def predict_pcalf():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
-
-
+            map.save(outfile='deploy_webapp/templates/pcalf_map.html')
+            return render_template('pcalf_map.html')
+            #return map._repr_html_()
         else: 
             return render_template('land_coord.html')
     else:
@@ -1272,9 +1305,12 @@ def predict_sjapf():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/sjapf_map.html')
+
+            return render_template('sjapf_map.html')
+            #return map._repr_html_()
 
         else: 
             return render_template('land_coord.html')
@@ -1384,9 +1420,13 @@ def predict_talaf():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
+            map = folium.Map(location=[latitude, longitude],zoom_start=8)
             folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map.save(outfile='deploy_webapp/templates/talaf_map.html')
+
+            return render_template('talaf_map.html')
+
+            #return map._repr_html_()
 
 
         else: 
@@ -1496,9 +1536,13 @@ def predict_xglaf():
 
             result = "Likeliood of presence: " + vals + "%"
 
-            map = folium.Map(location=[latitude, longitude])
-            folium.Marker(location=[latitude,longitude], popup=result).add_to(map)
-            return map._repr_html_()
+            map = folium.Map(location=[latitude, longitude],zoom_start=8,tooltip = 'This tooltip will appear on hover')
+            folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
+            map.save(outfile='deploy_webapp/templates/xglaf_map.html')
+
+            return render_template('xglaf_map.html')
+
+            #return map._repr_html_()
 
 
         else: 
