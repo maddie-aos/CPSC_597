@@ -770,6 +770,7 @@ def predict_xgla():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
+        
         inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
