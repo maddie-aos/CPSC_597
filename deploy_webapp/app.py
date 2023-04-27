@@ -42,7 +42,7 @@ xip_gla_model_future = load_model('deploy_webapp/saved_models/Xiphias_gladius_fu
 #Setting the main pages
 @app.route("/")
 def index():
-    return render_template('startup.html')
+    return render_template('index.html')
 
 @app.route("/present")
 def present():
