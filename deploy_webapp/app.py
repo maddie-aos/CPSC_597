@@ -110,7 +110,7 @@ def xip_gla_fut():
 def cit_sor_dist():
     map = folium.Map()
     info = "Present Distribution of the Pacific Sanddab"
-    gdf = gpd.read_file('data/data_raw/dis_shapefile/cit_sor.shp')
+    gdf = gpd.read_file('deploy_webapp/dis_shapefile/cit_sor.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -119,7 +119,7 @@ def cit_sor_dist():
 def eng_mor_dist():
     map = folium.Map()
     info = "Present Distribution of the Northern Anchovy"
-    gdf = gpd.read_file('data/data_raw/dis_shapefile/eng_mor.shp')
+    gdf = gpd.read_file('deploy_webapp/dis_shapefile/eng_mor.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -128,7 +128,7 @@ def eng_mor_dist():
 def par_cal_dist():
     map = folium.Map()
     info = "Present Distribution of the California Halibut"
-    gdf = gpd.read_file('data/data_raw/dis_shapefile/par_cal.shp')
+    gdf = gpd.read_file('deploy_webapp/dis_shapefile/par_cal.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -137,7 +137,7 @@ def par_cal_dist():
 def sco_jap_dist():
     map = folium.Map()
     info = "Present Distribution of the Chub Mackerel"
-    gdf = gpd.read_file('data/data_raw/dis_shapefile/sco_jap.shp')
+    gdf = gpd.read_file('deploy_webapp/dis_shapefile/sco_jap.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -146,7 +146,7 @@ def sco_jap_dist():
 def thu_ala_dist():
     map = folium.Map()
     info = "Present Distribution of the Albacore Tuna"
-    gdf = gpd.read_file('data/data_raw/dis_shapefile/thu_ala.shp')
+    gdf = gpd.read_file('deploy_webapp/dis_shapefile/thu_ala.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -155,7 +155,7 @@ def thu_ala_dist():
 def xip_gla_dist():
     map = folium.Map()
     info = "Present Distribution of the Pacific Swordfish"
-    gdf = gpd.read_file('data/data_raw/dis_shapefile/xip_gla.shp')
+    gdf = gpd.read_file('deploy_webapp/dis_shapefile/xip_gla.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -206,7 +206,7 @@ def predict_csor():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -218,14 +218,14 @@ def predict_csor():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -317,7 +317,7 @@ def predict_emor():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -329,14 +329,14 @@ def predict_emor():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -430,7 +430,7 @@ def predict_pcal():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -442,14 +442,14 @@ def predict_pcal():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -542,7 +542,7 @@ def predict_sjap():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -554,14 +554,14 @@ def predict_sjap():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -656,7 +656,7 @@ def predict_tala():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -668,14 +668,14 @@ def predict_tala():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -771,7 +771,7 @@ def predict_xgla():
 
     if not df.empty:
         
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -783,14 +783,14 @@ def predict_xgla():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -885,7 +885,7 @@ def predict_csorf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -897,14 +897,14 @@ def predict_csorf():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -999,7 +999,7 @@ def predict_emorf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1011,14 +1011,14 @@ def predict_emorf():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1113,7 +1113,7 @@ def predict_pcalf():
 
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1125,14 +1125,14 @@ def predict_pcalf():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1224,7 +1224,7 @@ def predict_sjapf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1236,14 +1236,14 @@ def predict_sjapf():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1337,7 +1337,7 @@ def predict_talaf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1349,14 +1349,14 @@ def predict_talaf():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1454,7 +1454,7 @@ def predict_xglaf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1466,14 +1466,14 @@ def predict_xglaf():
         row=[]
         col=[]
 
-        src=rasterio.open('data/modified_data/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('data/modified_data/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
