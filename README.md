@@ -39,7 +39,7 @@ In order to start the web application: please do the following
 
 5. Run the flask application:
    
-  ```flask run``` 
+   ```flask run``` 
 
 If the application is running properly the following message should be displayed on the terminal: 
 ```bash
