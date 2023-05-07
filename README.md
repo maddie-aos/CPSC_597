@@ -2,7 +2,9 @@
 Final Project CPSC 597 Code 
 
 Author: Madeline Smith 
+
 Email: madeline.smith@csu.fullerton.edu 
+
 CWID: 886664432
 
 # Project Description
