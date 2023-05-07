@@ -51,6 +51,11 @@ If the application is running properly the following message should be displayed
  To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ``` 
+6. To stop the application, run the following:
+7. 
+   ```Ctrl + C``` : this stops the server.
+
+   ```deactivate```: this deactivates the virtual environment.
 
 
 
