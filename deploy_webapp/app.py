@@ -12,7 +12,7 @@ import rasterio
 from osgeo import gdal
 import os
 import folium
-STATIC_DIR = os.path.abspath('deploy_webapp/static_files')
+STATIC_DIR = os.path.abspath('./static_files')
 
 #instantiating app 
 app = Flask(__name__, static_folder=STATIC_DIR)
@@ -23,20 +23,20 @@ eval_fut= pd.read_csv('results/DNN_performance/DNN_eval_future.txt', sep='\t', h
 
 #globally loading models for the sake of effiency 
 #loading keras models: present
-cit_sor_model = load_model('deploy_webapp/saved_models/Citharichthys_sordidus.h5')
-eng_mor_model = load_model('deploy_webapp/saved_models/Engraulis_mordax.h5')
-par_cal_model = load_model('deploy_webapp/saved_models/Paralichthys_californicus.h5')
-sco_jap_model = load_model('deploy_webapp/saved_models/Paralichthys_californicus.h5')
-thu_ala_model = load_model('deploy_webapp/saved_models/Thunnus_alalunga.h5')
-xip_gla_model = load_model('deploy_webapp/saved_models/Xiphias_gladius.h5')
+cit_sor_model = load_model('saved_models/Citharichthys_sordidus.h5')
+eng_mor_model = load_model('saved_models/Engraulis_mordax.h5')
+par_cal_model = load_model('saved_models/Paralichthys_californicus.h5')
+sco_jap_model = load_model('saved_models/Paralichthys_californicus.h5')
+thu_ala_model = load_model('saved_models/Thunnus_alalunga.h5')
+xip_gla_model = load_model('saved_models/Xiphias_gladius.h5')
 
 #loading keras models: future
-cit_sor_model_future = load_model('deploy_webapp/saved_models/Citharichthys_sordidus_future.h5')
-eng_mor_model_future = load_model('deploy_webapp/saved_models/Engraulis_mordax_future.h5')
-par_cal_model_future = load_model('deploy_webapp/saved_models/Paralichthys_californicus_future.h5')
-sco_jap_model_future = load_model('deploy_webapp/saved_models/Paralichthys_californicus_future.h5')
-thu_ala_model_future = load_model('deploy_webapp/saved_models/Thunnus_alalunga_future.h5')
-xip_gla_model_future = load_model('deploy_webapp/saved_models/Xiphias_gladius_future.h5')
+cit_sor_model_future = load_model('saved_models/Citharichthys_sordidus_future.h5')
+eng_mor_model_future = load_model('saved_models/Engraulis_mordax_future.h5')
+par_cal_model_future = load_model('saved_models/Paralichthys_californicus_future.h5')
+sco_jap_model_future = load_model('saved_models/Paralichthys_californicus_future.h5')
+thu_ala_model_future = load_model('saved_models/Thunnus_alalunga_future.h5')
+xip_gla_model_future = load_model('saved_models/Xiphias_gladius_future.h5')
 
 
 #Setting the main pages
@@ -110,7 +110,7 @@ def xip_gla_fut():
 def cit_sor_dist():
     map = folium.Map()
     info = "Present Distribution of the Pacific Sanddab"
-    gdf = gpd.read_file('deploy_webapp/dis_shapefile/cit_sor.shp')
+    gdf = gpd.read_file('dis_shapefile/cit_sor.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -119,7 +119,7 @@ def cit_sor_dist():
 def eng_mor_dist():
     map = folium.Map()
     info = "Present Distribution of the Northern Anchovy"
-    gdf = gpd.read_file('deploy_webapp/dis_shapefile/eng_mor.shp')
+    gdf = gpd.read_file('dis_shapefile/eng_mor.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -128,7 +128,7 @@ def eng_mor_dist():
 def par_cal_dist():
     map = folium.Map()
     info = "Present Distribution of the California Halibut"
-    gdf = gpd.read_file('deploy_webapp/dis_shapefile/par_cal.shp')
+    gdf = gpd.read_file('dis_shapefile/par_cal.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -137,7 +137,7 @@ def par_cal_dist():
 def sco_jap_dist():
     map = folium.Map()
     info = "Present Distribution of the Chub Mackerel"
-    gdf = gpd.read_file('deploy_webapp/dis_shapefile/sco_jap.shp')
+    gdf = gpd.read_file('dis_shapefile/sco_jap.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -146,7 +146,7 @@ def sco_jap_dist():
 def thu_ala_dist():
     map = folium.Map()
     info = "Present Distribution of the Albacore Tuna"
-    gdf = gpd.read_file('deploy_webapp/dis_shapefile/thu_ala.shp')
+    gdf = gpd.read_file('dis_shapefile/thu_ala.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -155,7 +155,7 @@ def thu_ala_dist():
 def xip_gla_dist():
     map = folium.Map()
     info = "Present Distribution of the Pacific Swordfish"
-    gdf = gpd.read_file('deploy_webapp/dis_shapefile/xip_gla.shp')
+    gdf = gpd.read_file('dis_shapefile/xip_gla.shp')
     folium.GeoJson(data=gdf["geometry"]).add_to(map)
     folium.Marker(location = [32.555,-117.89],popup=info).add_to(map)
     return map._repr_html_()
@@ -206,7 +206,7 @@ def predict_csor():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -218,14 +218,14 @@ def predict_csor():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -266,10 +266,10 @@ def predict_csor():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/csor_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor_prediction_row_col.csv')
+            prediction_array=np.save('predictions/csor_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/csor_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/csor_prediction_array.npy')
+            input_X=np.load('predictions/csor_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -291,7 +291,7 @@ def predict_csor():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/csor_map.html')
+            map.save(outfile='templates/csor_map.html')
             return render_template('csor_map.html')
             #return map._repr_html_()
 
@@ -317,7 +317,7 @@ def predict_emor():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -329,14 +329,14 @@ def predict_emor():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -376,10 +376,10 @@ def predict_emor():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/emor_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/emor_prediction_row_col.csv')
+            prediction_array=np.save('predictions/emor_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/emor_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/emor_prediction_array.npy')
+            input_X=np.load('predictions/emor_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -401,7 +401,7 @@ def predict_emor():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/emor_map.html')
+            map.save(outfile='templates/emor_map.html')
 
             return render_template('emor_map.html')
             #return map._repr_html_()
@@ -430,7 +430,7 @@ def predict_pcal():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -442,14 +442,14 @@ def predict_pcal():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -490,10 +490,10 @@ def predict_pcal():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/pcal_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/pcal_prediction_row_col.csv')
+            prediction_array=np.save('predictions/pcal_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/pcal_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/pcal_prediction_array.npy')
+            input_X=np.load('predictions/pcal_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -515,7 +515,7 @@ def predict_pcal():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/pcal_map.html')
+            map.save(outfile='templates/pcal_map.html')
 
             return render_template('pcal_map.html')
 
@@ -542,7 +542,7 @@ def predict_sjap():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -554,14 +554,14 @@ def predict_sjap():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -602,10 +602,10 @@ def predict_sjap():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/sjap_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sjap_prediction_row_col.csv')
+            prediction_array=np.save('predictions/sjap_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/sjap_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/sjap_prediction_array.npy')
+            input_X=np.load('predictions/sjap_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -627,7 +627,7 @@ def predict_sjap():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/sjap_map.html')
+            map.save(outfile='templates/sjap_map.html')
 
             return render_template('sjap_map.html')
 
@@ -656,7 +656,7 @@ def predict_tala():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -668,14 +668,14 @@ def predict_tala():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -716,10 +716,10 @@ def predict_tala():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/tala_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/tala_prediction_row_col.csv')
+            prediction_array=np.save('predictions/tala_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/tala_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/tala_prediction_array.npy')
+            input_X=np.load('predictions/tala_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -741,7 +741,7 @@ def predict_tala():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/tala_map.html')
+            map.save(outfile='templates/tala_map.html')
 
             return render_template('tala_map.html')
 
@@ -771,7 +771,7 @@ def predict_xgla():
 
     if not df.empty:
         
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle/bio_oracle_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -783,14 +783,14 @@ def predict_xgla():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -831,10 +831,10 @@ def predict_xgla():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/xgla_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/xgla_prediction_row_col.csv')
+            prediction_array=np.save('predictions/xgla_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/xgla_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/xgla_prediction_array.npy')
+            input_X=np.load('predictions/xgla_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -856,7 +856,7 @@ def predict_xgla():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/xgla_map.html')
+            map.save(outfile='templates/xgla_map.html')
 
             return render_template('xgla_map.html')
             #return map._repr_html_()
@@ -885,7 +885,7 @@ def predict_csorf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -897,14 +897,14 @@ def predict_csorf():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -945,10 +945,10 @@ def predict_csorf():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/csor_future_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor__future_prediction_row_col.csv')
+            prediction_array=np.save('predictions/csor_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/csor__future_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/csor_future_prediction_array.npy')
+            input_X=np.load('predictions/csor_future_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -970,7 +970,7 @@ def predict_csorf():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/csorf_map.html')
+            map.save(outfile='templates/csorf_map.html')
 
             return render_template('csorf_map.html')
 
@@ -999,7 +999,7 @@ def predict_emorf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1011,14 +1011,14 @@ def predict_emorf():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1059,10 +1059,10 @@ def predict_emorf():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/emor_future_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/emor__future_prediction_row_col.csv')
+            prediction_array=np.save('predictions/emor_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/emor__future_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/emor_future_prediction_array.npy')
+            input_X=np.load('predictions/emor_future_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -1084,7 +1084,7 @@ def predict_emorf():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/emorf_map.html')
+            map.save(outfile='templates/emorf_map.html')
 
             return render_template('emorf_map.html')
             #return map._repr_html_()
@@ -1113,7 +1113,7 @@ def predict_pcalf():
 
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1125,14 +1125,14 @@ def predict_pcalf():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1173,10 +1173,10 @@ def predict_pcalf():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/pcal_future_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/pcal__future_prediction_row_col.csv')
+            prediction_array=np.save('predictions/pcal_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/pcal__future_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/pcal_future_prediction_array.npy')
+            input_X=np.load('predictions/pcal_future_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -1198,7 +1198,7 @@ def predict_pcalf():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/pcalf_map.html')
+            map.save(outfile='templates/pcalf_map.html')
             return render_template('pcalf_map.html')
             #return map._repr_html_()
         else: 
@@ -1224,7 +1224,7 @@ def predict_sjapf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1236,14 +1236,14 @@ def predict_sjapf():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1283,10 +1283,10 @@ def predict_sjapf():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/sjap_future_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/sjap__future_prediction_row_col.csv')
+            prediction_array=np.save('predictions/sjap_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/sjap__future_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/sjap_future_prediction_array.npy')
+            input_X=np.load('predictions/sjap_future_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -1308,7 +1308,7 @@ def predict_sjapf():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/sjapf_map.html')
+            map.save(outfile='templates/sjapf_map.html')
 
             return render_template('sjapf_map.html')
             #return map._repr_html_()
@@ -1337,7 +1337,7 @@ def predict_talaf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1349,14 +1349,14 @@ def predict_talaf():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1397,10 +1397,10 @@ def predict_talaf():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/tala_future_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/tala__future_prediction_row_col.csv')
+            prediction_array=np.save('predictions/tala_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/tala__future_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/tala_future_prediction_array.npy')
+            input_X=np.load('predictions/tala_future_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -1423,7 +1423,7 @@ def predict_talaf():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/talaf_map.html')
+            map.save(outfile='templates/talaf_map.html')
 
             return render_template('talaf_map.html')
 
@@ -1454,7 +1454,7 @@ def predict_xglaf():
     df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
 
     if not df.empty:
-        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
+        inRas=gdal.Open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif')
         myarray=inRas.ReadAsArray()
 
         len_pd=np.arange(len(df))
@@ -1466,14 +1466,14 @@ def predict_xglaf():
         row=[]
         col=[]
 
-        src=rasterio.open('deploy_webapp/stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
+        src=rasterio.open('stacked_bio_oracle_future/bio_oracle_future_stacked.tif', crs= 'espg: 4326')
         
         for i in len_pd:
             row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
             row.append(row_n)
             col.append(col_n)
         
-        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
+        mean_std=pd.read_csv('stacked_bio_oracle_future/future_env_bio_mean_std.txt',sep="\t")
         mean_std=mean_std.to_numpy()
         
         X=[]
@@ -1513,10 +1513,10 @@ def predict_xglaf():
             row=row.values
             col=col.values
             
-            prediction_array=np.save('deploy_webapp/predictions/xgla_future_prediction_array.npy',input_X)
-            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/xgla__future_prediction_row_col.csv')
+            prediction_array=np.save('predictions/xgla_future_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('predictions/xgla__future_prediction_row_col.csv')
             
-            input_X=np.load('deploy_webapp/predictions/xgla_future_prediction_array.npy')
+            input_X=np.load('predictions/xgla_future_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
@@ -1539,7 +1539,7 @@ def predict_xglaf():
 
             map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
             folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
-            map.save(outfile='deploy_webapp/templates/xglaf_map.html')
+            map.save(outfile='templates/xglaf_map.html')
 
             return render_template('xglaf_map.html')
 
@@ -1553,5 +1553,5 @@ def predict_xglaf():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
     
