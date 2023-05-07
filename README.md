@@ -52,7 +52,7 @@ If the application is running properly the following message should be displayed
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ``` 
 6. To stop the application, run the following:
-7. 
+
    ```Ctrl + C``` : this stops the server.
 
    ```deactivate```: this deactivates the virtual environment.
